@@ -1,9 +1,10 @@
 import time
+import pytest
 
 
 def run_test_on_issue():
     while True:
-        print("Start running tests")
+        print("Checking for new tests in DB")
         issue_list = get_issue_list_from_db()
         if len(issue_list) == 0:
             time.sleep(5)
@@ -38,7 +39,11 @@ def get_issue_list_from_db():
 
 
 def run_test():
-    return 0
+    result = pytest.main([r"C:\Users\IB\PycharmProjects\graduation_project\Team3\Final_Project_Harmonic\run_test_on_issue\tests"])
+    if result.value == result.OK:
+        print("Test passed")
+    else:
+        print("Test failed")
 
 
 def put_test_result_to_db(test_result):
